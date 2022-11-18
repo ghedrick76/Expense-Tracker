@@ -1,20 +1,34 @@
+# Import libraries
 import PySimpleGUI as sg
+import pysimplesql as ss
+
+
+# --------------------------------
+# Create the database to work with
+# --------------------------------
+
+sql="""
+CREATE TABLE Fixed Expenses("""
+
+
+
 
 # Change the color of windows
 sg.theme('BluePurple')
 
 # Create layout for the main window
-layout = [  [sg.Text("What would you like to do?")],
+layout = [  [sg.Text("Choose what you would like to do!")],
+            [],
             [sg.Button("Input Expense")],
             [sg.Button("Input Income")],
             [sg.Button("Analyze")],
             [sg.Button("Exit")]  ]
 
 # Resize window layout
-layout = [[sg.Sizer(0,250), sg.Column([[sg.Sizer(250,0)]] + layout, element_justification='c', pad=(0,0))]]
+layout = [[sg.Sizer(0,200), sg.Column([[sg.Sizer(200,0)]] + layout, element_justification='c', pad=(0,0))]]
 
-# Create windows
-window_1 = sg.Window("Expense Tracker", layout)
+# Create each window
+window_1 = sg.Window("Budgeting Application", layout)
 
 win2_active = False
 
@@ -22,7 +36,7 @@ win3_active = False
 
 win4_active = False
 
-# Event Loop to process events and get the values of inputs
+# Create the event loop to process events and values
 # Main Window
 while True:
     event, values = window_1.read()
@@ -36,17 +50,22 @@ while True:
         win2_active = True
 
         # Create layout for Expense window
-        layout_expense = [  [sg.Text("Window 2"),
-                            [sg.Button("Exit")]]]
+        layout_expense = [  [sg.Push(), sg.Text("Enter expenses"), sg.Push()],
+                            [sg.Push(), sg.Text("Input expense type"), sg.InputText()],
+                            [sg.Push(), sg.Text("Input cost"), sg.InputText()],
+                            [sg.Push(), sg.Text("Input date of expense"), sg.InputText()],
+                            [sg.Button("Enter")], [sg.Button("Back")]  ]
         
         win2 = sg.Window("Input Expense", layout_expense)
         while True:
             ev2, val2 = win2.read()
-            if ev2 is None or ev2 == "Exit":
+            if ev2 is None or ev2 == "Back":
                 win2_active = False
                 win2.Close()
                 window_1.UnHide()
                 break
+            if ev2 == "Enter":
+                sg.Popup("Expense entered!", no_titlebar=True)
 
     # Income window
     if not win3_active and event == "Input Income":
