@@ -13,4 +13,6 @@ def retrieve_expense():
     cursor = conn.execute("SELECT expense, cost, date FROM EXPENSE_INFO")
     for row in cursor:
         results.append(list(row))
+    return results
+
 

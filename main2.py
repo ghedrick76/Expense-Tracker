@@ -1,16 +1,12 @@
 # Import libraries
 import PySimpleGUI as sg
-import pysimplesql as ss
+import functions
+import expense_info_window
 
 
-# --------------------------------
-# Create the database to work with
-# --------------------------------
-
-sql="""
-CREATE TABLE Fixed Expenses("""
-
-
+# ---------------
+# USE THIS FORMAT
+# ---------------
 
 
 # Change the color of windows
@@ -36,25 +32,32 @@ win3_active = False
 
 win4_active = False
 
-# Create the event loop to process events and values
+# Create the main event loop to process all events and values
+
+# -----------
 # Main Window
+# -----------
 while True:
     event, values = window_1.read()
     print(event, values)
     if event is None or event == "Exit":
         break
 
+
+
+    # --------------
     # Expense window
+    # --------------
     if not win2_active and event == "Enter Expense":
         window_1.Hide()
         win2_active = True
 
         # Create layout for Expense window
         layout_expense = [  [sg.Push(), sg.Text("Enter expenses"), sg.Push()],
-                            [sg.Push(), sg.Text("Enter Expense type"), sg.InputText()],
-                            [sg.Push(), sg.Text("Input cost"), sg.InputText()],
-                            [sg.Push(), sg.Text("Input date of expense"), sg.InputText()],
-                            [sg.Button("Enter")], [sg.Button("Back")]  ]
+                            [sg.Push(), sg.Text("Enter Expense type"), sg.Input(key="-expense-", do_not_clear=True, size=(20, 1))],
+                            [sg.Push(), sg.Text("Input cost"), sg.Input(key="-cost-", do_not_clear=True, size=(20, 1))],
+                            [sg.Push(), sg.Text("Input date of expense"), sg.Input(key="-date-", do_not_clear=True, size=(20, 1))],
+                            [sg.Button("Submit Expense")], [sg.Button("Show Expenses")], [sg.Button("Back")]  ]
         
         win2 = sg.Window("Expenses", layout_expense)
         while True:
@@ -64,10 +67,21 @@ while True:
                 win2.Close()
                 window_1.UnHide()
                 break
-            if ev2 == "Enter":
+            if ev2 == "Submit Expense":
+                functions.insert_expense(val2["-expense-"], val2["-cost-"], val2["-date-"])
                 sg.Popup("Expense entered!", no_titlebar=True)
+            if ev2 == "Show Expenses":
+                expense_info_window.create()
 
+            
+
+
+
+
+
+    # -------------
     # Income window
+    # -------------
     if not win3_active and event == "Input Income":
         window_1.Hide()
         win3_active = True
