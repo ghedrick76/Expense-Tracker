@@ -86,7 +86,7 @@ while True:
         window_1.Hide()
         win3_active = True
 
-        # Create layout for Expense window
+        # Create layout for Income window
         layout_income = [  [sg.Text("Window 3"),
                             [sg.Button("Exit")]]]
         
@@ -99,12 +99,12 @@ while True:
                 window_1.UnHide()
                 break
 
-    # AnalyzE window
+    # Analyze window
     if not win4_active and event == "Analyze":
         window_1.Hide()
         win4_active = True
 
-        # Create layout for Expense window
+        # Create layout for Analyze window
         layout_analyze = [  [sg.Text("Window 4"),
                             [sg.Button("Exit")]]]
         
