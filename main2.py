@@ -4,9 +4,9 @@ import functions
 import expense_info_window
 
 
-# ---------------
-# USE THIS FORMAT
-# ---------------
+# -----------------
+# BUILD MAIN WINDOW
+# -----------------
 
 
 # Change the color of windows
