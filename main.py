@@ -5,13 +5,13 @@ sg.theme('BluePurple')
 
 # Format window
 layout = [  [sg.Text("Enter expense")],
-            [sg.Text("Input expense type"), sg.InputText()],
-            [sg.Text("Input cost"), sg.InputText()],
-            [sg.Text("Input date of expense"), sg.InputText()],
-            [sg.Button("OK"), sg.Button("Exit")]  ]
+            [sg.Push(), sg.Text("Input expense type"), sg.InputText()],
+            [sg.Push(), sg.Text("Input cost"), sg.InputText()],
+            [sg.Push(), sg.Text("Input date of expense"), sg.InputText()],
+            [sg.Push(), sg.Button("OK"), sg.Button("Exit"), sg.Push()]  ]
             
 # Create window
-window = sg.Window("Expense Tracker", layout)
+window = sg.Window("Expense Tracker", layout, element_justification="c")
 
 # Event Loop to process events and get the values of inputs
 while True:
