@@ -19,8 +19,8 @@ sg.theme('BluePurple')
 # Create layout for the main window
 layout = [  [sg.Text("Choose what you would like to do!")],
             [],
-            [sg.Button("Input Expense")],
-            [sg.Button("Input Income")],
+            [sg.Button("Enter Expense")],
+            [sg.Button("Enter Income")],
             [sg.Button("Analyze")],
             [sg.Button("Exit")]  ]
 
@@ -45,18 +45,18 @@ while True:
         break
 
     # Expense window
-    if not win2_active and event == "Input Expense":
+    if not win2_active and event == "Enter Expense":
         window_1.Hide()
         win2_active = True
 
         # Create layout for Expense window
         layout_expense = [  [sg.Push(), sg.Text("Enter expenses"), sg.Push()],
-                            [sg.Push(), sg.Text("Input expense type"), sg.InputText()],
+                            [sg.Push(), sg.Text("Enter Expense type"), sg.InputText()],
                             [sg.Push(), sg.Text("Input cost"), sg.InputText()],
                             [sg.Push(), sg.Text("Input date of expense"), sg.InputText()],
                             [sg.Button("Enter")], [sg.Button("Back")]  ]
         
-        win2 = sg.Window("Input Expense", layout_expense)
+        win2 = sg.Window("Expenses", layout_expense)
         while True:
             ev2, val2 = win2.read()
             if ev2 is None or ev2 == "Back":
